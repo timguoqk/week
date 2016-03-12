@@ -1,0 +1,34 @@
+body {
+	padding: 20px;
+}
+
+h1 {
+	height: 5vh;
+}
+
+#main-container {
+	width: 100%;
+	height: 65vh;
+}
+
+#control-panel {
+	height: calc(30vh - 65px);
+}
+
+.axis path {
+	stroke: black;
+	fill: none;
+}
+
+.axis line {
+	stroke: white;
+}
+
+#tip {
+	position: absolute;
+	visibility: hidden;
+}
+
+#tip.active {
+	visibility: visible;
+}
