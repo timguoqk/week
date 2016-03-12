@@ -26,9 +26,10 @@ h1 {
 
 #tip {
 	position: absolute;
-	visibility: hidden;
+	opacity: 0;
+	transition: all .25s ease-in-out;
 }
 
 #tip.active {
-	visibility: visible;
+	opacity: 1;
 }

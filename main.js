@@ -19,7 +19,7 @@ $(document).ready(function() {
       data = rows;
       // Break events that cross midnight
       function clean(ds) {
-        for (var i = 0; i < ds.length; i ++) {
+        for (var i = 1; i < ds.length; i ++) {
           if (ds[i].stopH < ds[i].startH) {
             ds.push({
               startH: 0,
@@ -47,7 +47,6 @@ $(document).ready(function() {
 function plot() {
   width = $('#main-container').width();
   height = $('#main-container').height();
-  console.log(height);
   var svg = d3.select('#main-container').append('svg')
     .attr('width', width)
     .attr('height', height)
@@ -88,9 +87,13 @@ function plot() {
       return colorScale(d.type);
     })
     .attr('class', 'time-use')
+    .attr('case-id', function(d, i) { return i; })
     .on('mouseenter', function(d) {
       $('#tip').html(types[d.type]);
-      $('#tip').css({'left': event.pageX, 'top': event.pageY});
+      $('#tip').css({
+        'left': $(this).position().left,
+        'top': $(this).position().top + $(this).attr('height') / 3
+      });
       $('#tip').toggleClass('active');
     })
     .on('mouseleave', function() {
@@ -103,6 +106,15 @@ function plot() {
   svg.append('g')
     .attr('class', 'axis yAxis')
     .call(yAxis);
+
+  // Legend
+  var legend = d3.legend.color()
+    .scale(colorScale)
+    .labels(types);
+  svg.append('g')
+    .attr('class', 'legend')
+    .attr('transform', 'translate(' + (xScale.range()[1] + 20).toString() + ', 50)')
+    .call(legend);
 }
 
 function redraw() {
