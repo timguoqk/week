@@ -1,7 +1,7 @@
 'use strict';
 var timeUseData, data;
 var width, height, svg;
-var types = ['Personal Care', 'Household Activities', 'Caring For & Helping Household (HH) Members', 'Caring For & Helping NonHH Members', 'Work & Work-Related Activities', 'Education', 'Consumer Purchases', 'Professional & Personal Care Services', 'Household Services', 'Government Services & Civic Obligations', 'Eating And Drinking', 'Socializing, Relaxing, And Leisure', 'Sports, Exercise And Recreation', 'Religious and Spiritual Activities', 'Volunteer Activities', 'Telephone Calls', 'Traveling', 'Data Codes'];
+var types = ['Personal Care', 'Household Activities', 'Caring For & Helping Household (HH) Members', 'Caring For & Helping NonHH Members', 'Work & Work-Related Activities', 'Education', 'Consumer Purchases', 'Professional & Personal Care Services', 'Household Services', 'Government Services & Civic Obligations', 'Eating And Drinking', 'Socializing, Relaxing, And Leisure', 'Sports, Exercise And Recreation', 'Religious and Spiritual Activities', 'Volunteer Activities', 'Telephone Calls', 'Traveling'];
 
 $(document).ready(function() {
   $.getJSON('timeuse.json', function(json, textStatus) {
@@ -52,7 +52,11 @@ function plot() {
     .attr('height', height)
   .append('g')
     .attr('transform', 'translate(50, 50)');
-  var colorScale = d3.scale.category20c().domain(d3.range(types.length));
+  // Category 20c
+  var colors = ["#a1d99b", "#969696", "#636363", "#fdae6b", "#9e9ac8", "#fdd0a2", "#74c476", "#fd8d3c", "#c6dbef", "#d9d9d9", "#6baed6", "#bdbdbd", "#bcbddc", "#756bb1", "#e6550d", "#c7e9c0", "#dadaeb", "#3182bd", "#9ecae1", "#31a354"];
+  var colorScale = d3.scale.ordinal()
+    .range(colors)
+    .domain(d3.range(types.length));
   var xScale = d3.scale.linear()
     .domain([0, 24])
     .range([0, (width - 150) / 2]);
@@ -70,9 +74,10 @@ function plot() {
     .tickFormat(function(d) {
       return moment().weekday(d).toString().substring(0, 3);
     });
-  svg.selectAll('rect.time-use')
+  var personalRects = svg.selectAll('rect.personal')
     .data(data)
   .enter().append('rect')
+    .attr('class', 'personal')
     .attr('x', function(d) {
       return xScale(d.startH + d.startM / 60);
     })
@@ -86,7 +91,6 @@ function plot() {
     .attr('fill', function(d) {
       return colorScale(d.type);
     })
-    .attr('class', 'time-use')
     .attr('case-id', function(d, i) { return i; })
     .on('mouseenter', function(d) {
       $('#tip').html(types[d.type]);
@@ -110,11 +114,24 @@ function plot() {
   // Legend
   var legend = d3.legend.color()
     .scale(colorScale)
-    .labels(types);
+    .labels(types)
+    .on('cellover', function(i) {
+      highlight(i);
+    })
+    .on('cellout', function() {
+      highlight(-1);
+    });
   svg.append('g')
     .attr('class', 'legend')
     .attr('transform', 'translate(' + (xScale.range()[1] + 20).toString() + ', 50)')
     .call(legend);
+
+  function highlight(i) {
+    personalRects.transition(800)
+      .attr('opacity', function(d) {
+        return (i == -1 || i == d.type) ? 1 : 0.2;
+      });
+  }
 }
 
 function redraw() {
