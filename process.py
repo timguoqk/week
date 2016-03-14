@@ -6,7 +6,7 @@ def main():
     with open('atusresp_2014.csv') as f:
         r = csv.DictReader(f)
         resp = {
-            x['TUCASEID']: int(x['TUDIARYDAY']) + 1
+            x['TUCASEID']: int(x['TUDIARYDAY']) - 1
             for x in r
         }
     with open('atusact_2014.csv') as f:
@@ -19,7 +19,7 @@ def main():
             'stopM': int(x['TUSTOPTIME'][x['TUSTOPTIME'].index(':') + 1:-3]),
             # 'actDur': int(x['TUACTDUR24']),
             # 'cumDur': int(x['TUCUMDUR24']),
-            'type': int(x['TUTIER1CODE']),
+            'type': int(x['TUTIER1CODE']) - 1,
             'week': resp[x['TUCASEID']]
         } for x in raw]
     with open('timeuse.json', 'w') as f:

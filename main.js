@@ -1,5 +1,5 @@
 'use strict';
-var timeUseData, data;
+var timeUseData, timeUseVotedData, data, timeUseStats, stats;
 var width, height, svg;
 var types = ['Personal Care', 'Household Activities', 'Caring For & Helping Household (HH) Members', 'Caring For & Helping NonHH Members', 'Work & Work-Related Activities', 'Education', 'Consumer Purchases', 'Professional & Personal Care Services', 'Household Services', 'Government Services & Civic Obligations', 'Eating And Drinking', 'Socializing, Relaxing, And Leisure', 'Sports, Exercise And Recreation', 'Religious and Spiritual Activities', 'Volunteer Activities', 'Telephone Calls', 'Traveling'];
 
@@ -18,6 +18,16 @@ $(document).ready(function() {
     }, function(err, rows) {
       data = rows;
       // Break events that cross midnight
+      timeUseData = clean(timeUseData);
+      data = clean(data);
+
+      timeUseStats = calcStats(timeUseData);
+      stats = calcStats(data);
+
+      timeUseVotedData = vote(timeUseData);
+
+      plot();
+
       function clean(ds) {
         for (var i = 1; i < ds.length; i ++) {
           if (ds[i].stopH < ds[i].startH) {
@@ -35,10 +45,62 @@ $(document).ready(function() {
         }
         return ds;
       }
-      timeUseData = clean(timeUseData);
-      data = clean(data);
 
-      plot();
+      function calcStats(ds) {
+        var res = _.range(types.length).map(function() { return 0; });
+        for (var i = 0; i < ds.length; i ++)
+          res[ds[i].type] += ds[i].stopH - ds[i].startH + (ds[i].stopM - ds[i].startM) / 60;
+        // The last entry is the sum
+        res.push(res.reduce(function(x, y) { return x + y; }));
+        return res;
+      }
+
+      function vote(ds) {
+        var res = _.range(7).map(function() {
+          return _.range(24).map(function() {
+            return _.range(6).map(function() {
+              return _.range(types.length).map(_.constant(0));
+            });
+          });
+        });
+        for (var i = 0; i < ds.length; i ++) {
+          var j = ds[i].startH, k = Math.floor(ds[i].startM / 10);
+          while (j < ds[i].stopH || (j == ds[i].stopH && k <= ds[i].stopM / 10)) {
+            res[ds[i].week][j][k][ds[i].type] += 1;
+            k += 1;
+            if (k == 6) {
+              k = 0;
+              j += 1;
+            }
+          }
+        }
+        return res.reduce(function(iprev, icurr, i) {
+          var raw = icurr.reduce(function(jprev, jcurr, j) {
+            return jprev.concat(jcurr.map(function(kcurr, k) {
+              return {
+                startH: j,
+                startM: 10 * k,
+                stopH: j,
+                stopM: 10 * k + 10,
+                week: i,
+                type: kcurr.indexOf(_.max(kcurr))
+              };
+            }));
+          }, []);
+          // Merge events of the same type
+          var out = [raw[0]];
+          for (var j = 1; j < raw.length; j ++) {
+            if (raw[j].type == out[out.length - 1].type)
+              continue;
+            out[out.length - 1].stopH = raw[j - 1].stopH;
+            out[out.length - 1].stopM = raw[j - 1].stopM;
+            out.push(raw[j]);
+          }
+          out[out.length - 1].stopH = raw[raw.length - 1].stopH;
+          out[out.length - 1].stopM = raw[raw.length - 1].stopM;
+          return iprev.concat(out);
+        }, []);
+      }
     });
   });
   $(window).on('resize', redraw);
@@ -53,7 +115,7 @@ function plot() {
   .append('g')
     .attr('transform', 'translate(50, 50)');
   // Category 20c
-  var colors = ["#a1d99b", "#969696", "#636363", "#fdae6b", "#9e9ac8", "#fdd0a2", "#74c476", "#fd8d3c", "#c6dbef", "#d9d9d9", "#6baed6", "#bdbdbd", "#bcbddc", "#756bb1", "#e6550d", "#c7e9c0", "#dadaeb", "#3182bd", "#9ecae1", "#31a354"];
+  var colors = ["#a1d99b", "#969696", "#636363", "#fdae6b", "#9e9ac8", "#fdd0a2", "#74c476", "#fd8d3c", "#c6dbef", "#d9d9d9", "#6baed6", "#bdbdbd", "#bcbddc", "#dadaeb", "#e6550d", "#c7e9c0", "#756bb1"];
   var colorScale = d3.scale.ordinal()
     .range(colors)
     .domain(d3.range(types.length));
@@ -96,12 +158,16 @@ function plot() {
       $('#tip').html(types[d.type]);
       $('#tip').css({
         'left': $(this).position().left,
-        'top': $(this).position().top + $(this).attr('height') / 3
+        'top': $(this).position().top
       });
       $('#tip').toggleClass('active');
     })
     .on('mouseleave', function() {
       $('#tip').toggleClass('active');
+      highlight(-1);
+    })
+    .on('click', function(d) {
+      highlight(d.type);
     });
 
   svg.append('g')
@@ -125,6 +191,13 @@ function plot() {
     .attr('class', 'legend')
     .attr('transform', 'translate(' + (xScale.range()[1] + 20).toString() + ', 50)')
     .call(legend);
+
+  for (var i = 0; i < 7; i ++)
+    plotWeekDay(i);
+
+  function plotWeekDay(wd) {
+
+  }
 
   function highlight(i) {
     personalRects.transition(800)
