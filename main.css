@@ -11,8 +11,8 @@ h1 {
 	height: 65vh;
 }
 
-#control-panel {
-	height: calc(30vh - 65px);
+#line-charts {
+	height: calc(30vh - 30px);
 }
 
 .axis path {
@@ -32,4 +32,13 @@ h1 {
 
 #tip.active {
 	opacity: 1;
+}
+
+#line-charts svg {
+	width: 100%;
+	height: 100%;
+}
+
+.row, .column {
+	height: 100%;
 }

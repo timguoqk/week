@@ -1,7 +1,8 @@
 'use strict';
-var timeUseData, timeUseVotedData, data, timeUseStats, stats;
+var timeUseData, timeUseVotedData, data, selectedData, timeUseStats, stats;
 var width, height, svg;
 var types = ['Personal Care', 'Household Activities', 'Caring For & Helping Household (HH) Members', 'Caring For & Helping NonHH Members', 'Work & Work-Related Activities', 'Education', 'Consumer Purchases', 'Professional & Personal Care Services', 'Household Services', 'Government Services & Civic Obligations', 'Eating And Drinking', 'Socializing, Relaxing, And Leisure', 'Sports, Exercise And Recreation', 'Religious and Spiritual Activities', 'Volunteer Activities', 'Telephone Calls', 'Traveling'];
+var dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 $(document).ready(function() {
   $.getJSON('timeuse.json', function(json, textStatus) {
@@ -51,7 +52,7 @@ $(document).ready(function() {
         for (var i = 0; i < ds.length; i ++)
           res[ds[i].type] += ds[i].stopH - ds[i].startH + (ds[i].stopM - ds[i].startM) / 60;
         // The last entry is the sum
-        res.push(res.reduce(function(x, y) { return x + y; }));
+        // res.push(res.reduce(function(x, y) { return x + y; }));
         return res;
       }
 
@@ -107,6 +108,7 @@ $(document).ready(function() {
 });
 
 function plot() {
+  selectedData = data;
   width = $('#main-container').width();
   height = $('#main-container').height();
   var svg = d3.select('#main-container').append('svg')
@@ -134,7 +136,7 @@ function plot() {
     .orient('left')
     .tickSize(-(width - 150) / 2)
     .tickFormat(function(d) {
-      return moment().weekday(d).toString().substring(0, 3);
+      return dayOfWeek[d];
     });
   var personalRects = svg.selectAll('rect.personal')
     .data(data)
@@ -192,18 +194,55 @@ function plot() {
     .attr('transform', 'translate(' + (xScale.range()[1] + 20).toString() + ', 50)')
     .call(legend);
 
-  for (var i = 0; i < 7; i ++)
-    plotWeekDay(i);
+  // dow-chart
+  var wdSvg, wdX, wdY, wdXAxis, wdYAxis;
 
-  function plotWeekDay(wd) {
-
-  }
+  // bar-chart
+  var barSvg, barH, barW, barX, barY, barXAxis, barYAxis;
+  barSvg = d3.select('#bar-chart').append('svg')
+    .append('g').attr('transform', 'translate(30, 30)');
+  barW = $('#bar-chart').width() - 30;
+  barH = $('#bar-chart').height() - 30;
+  barX = d3.scale.ordinal()
+    .domain(_.range(types.length))
+    .rangeRoundBands([0, barW], .1);
+  barY = d3.scale.linear()
+    .domain([0, _.max(stats)])
+    .range([barH - 30, 0]);
+  barXAxis = d3.svg.axis()
+    .scale(barX)
+    .orient('bottom');
+  barYAxis = d3.svg.axis()
+    .scale(barY)
+    .orient('left');
+  barSvg.append('g')
+    .attr('class', 'x axis')
+    .attr('transform', 'translate(0, ' + (barH - 30) + ')')
+    .call(barXAxis);
+  barSvg.append('g')
+    .attr('class', 'y axis')
+    .call(barYAxis);
+  barSvg.selectAll('rect.bar')
+    .data(stats)
+  .enter().append('rect')
+    .attr('class', 'bar')
+    .attr('x', function(d, i) { return barX(i); })
+    .attr('width', barX.rangeBand())
+    .attr('y', barY)
+    .attr('height', function(d) { return barH - 30 - barY(d); });
 
   function highlight(i) {
-    personalRects.transition(800)
-      .attr('opacity', function(d) {
-        return (i == -1 || i == d.type) ? 1 : 0.2;
-      });
+    if (i == -1) {
+      selectedData = data;
+      personalRects.transition(800).attr('opacity', 1);
+    } else {
+      selectedData = _.where(data, {type: i});
+      personalRects.transition(800)
+        .attr('opacity', function(d) {
+          return (i == d.type) ? 1 : 0.2;
+        });
+    }
+      
   }
 }
 
