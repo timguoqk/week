@@ -30,6 +30,7 @@ $(document).ready(function() {
       plot();
 
       function clean(ds) {
+        ds = _.reject(ds, function(d) { return d.type >= types.length; });
         for (var i = 1; i < ds.length; i ++) {
           if (ds[i].stopH < ds[i].startH) {
             ds.push({
@@ -48,9 +49,11 @@ $(document).ready(function() {
       }
 
       function calcStats(ds) {
-        var res = _.range(types.length).map(function() { return 0; });
+        var res = [];
+        for (var i = 0; i < types.length; i ++)
+          res.push({id: i, val: 0});
         for (var i = 0; i < ds.length; i ++)
-          res[ds[i].type] += ds[i].stopH - ds[i].startH + (ds[i].stopM - ds[i].startM) / 60;
+          res[ds[i].type].val += ds[i].stopH - ds[i].startH + (ds[i].stopM - ds[i].startM) / 60;
         // The last entry is the sum
         // res.push(res.reduce(function(x, y) { return x + y; }));
         return res;
@@ -156,11 +159,12 @@ function plot() {
       return colorScale(d.type);
     })
     .attr('case-id', function(d, i) { return i; })
-    .on('mouseenter', function(d) {
+    .on('mouseenter', function(d, i) {
+      var rect = $('[case-id=' + i + ']');
       $('#tip').html(types[d.type]);
       $('#tip').css({
-        'left': $(this).position().left,
-        'top': $(this).position().top
+        'left': rect.offset().left - $('#tip').outerWidth() / 2 + parseInt(rect.attr('width')) / 2,
+        'top': rect.offset().top - $('#tip').outerHeight()
       });
       $('#tip').toggleClass('active');
     })
@@ -196,57 +200,100 @@ function plot() {
 
   // dow-chart
   var wdSvg, wdX, wdY, wdXAxis, wdYAxis;
+  var line = d3.svg.line()
+    .interpolate('basis')
+    .x(function(d, i) { return wdX(i); })
+    .y(function(d) { return wdY(d); });
 
   // bar-chart
   var barSvg, barH, barW, barX, barY, barXAxis, barYAxis;
   barSvg = d3.select('#bar-chart').append('svg')
-    .append('g').attr('transform', 'translate(30, 30)');
+    .append('g').attr('transform', 'translate(30, 0)');
+  // TODO: use padding
   barW = $('#bar-chart').width() - 30;
-  barH = $('#bar-chart').height() - 30;
+  barH = $('#bar-chart').height();
   barX = d3.scale.ordinal()
-    .domain(_.range(types.length))
+    .domain(_.pluck(stats, 'id'))
     .rangeRoundBands([0, barW], .1);
   barY = d3.scale.linear()
-    .domain([0, _.max(stats)])
-    .range([barH - 30, 0]);
+    .domain([0, _.max(_.pluck(stats, 'val'))])
+    .range([barH - 20, 0]);
   barXAxis = d3.svg.axis()
     .scale(barX)
-    .orient('bottom');
+    .orient('bottom')
+    .tickFormat('');
   barYAxis = d3.svg.axis()
     .scale(barY)
+    .ticks(5)
     .orient('left');
   barSvg.append('g')
     .attr('class', 'x axis')
-    .attr('transform', 'translate(0, ' + (barH - 30) + ')')
+    .attr('transform', 'translate(0, ' + (barH - 20) + ')')
     .call(barXAxis);
   barSvg.append('g')
     .attr('class', 'y axis')
     .call(barYAxis);
-  barSvg.selectAll('rect.bar')
+  var barRects = barSvg.selectAll('rect.bar')
     .data(stats)
   .enter().append('rect')
     .attr('class', 'bar')
-    .attr('x', function(d, i) { return barX(i); })
+    .attr('category-id', function(d) { return d.id; })
+    .attr('x', function(d) { return barX(d.id); })
     .attr('width', barX.rangeBand())
-    .attr('y', barY)
-    .attr('height', function(d) { return barH - 30 - barY(d); });
+    .attr('y', function(d) { return barY(d.val); })
+    .attr('height', function(d) { return barH - 20 - barY(d.val); })
+    .attr('fill', function(d) { return colorScale(d.id); })
+    .on('click', function(d) { highlight(d.id); })
+    .on('mouseover', function(d) {
+      var rect = $('[category-id=' + d.id + ']');
+      $('#tip').html(types[d.id] + ': ' + d.val.toFixed(2) + 'h');
+      $('#tip').css({
+        'left': rect.offset().left - $('#tip').outerWidth() / 2 + parseInt(rect.attr('width')) / 2,
+        'top': rect.offset().top - $('#tip').outerHeight() - 10
+      });
+      $('#tip').toggleClass('active');
+      highlight(d.id);
+    })
+    .on('mouseleave', function(d) {
+      highlight(-1);
+      $('#tip').toggleClass('active');
+    });
+  $('#sort-button').on('click', function() {
+    if ($(this).hasClass('active'))
+      stats = _.sortBy(stats, 'id');
+    else
+      stats = _.sortBy(stats, function(d) { return -d.val; });
+    barX.domain(_.pluck(stats, 'id'));
+    barRects.transition()
+      .duration(800)
+      .attr('x', function(d) { return barX(d.id); });
+    $(this).toggleClass('active')
+  });
 
-  function highlight(i) {
-    if (i == -1) {
+  function highlight(idx) {
+    if (idx == -1) {
       selectedData = data;
-      personalRects.transition(800).attr('opacity', 1);
+      $('#bar-chart rect.bar').removeClass('active');
+      personalRects.transition().attr('opacity', 1);
+      barRects.transition().attr('opacity', 1);
     } else {
-      selectedData = _.where(data, {type: i});
-      personalRects.transition(800)
+      $('#bar-chart rect.bar[category-id=' + idx + ']').addClass('active');
+      selectedData = _.where(data, {type: idx});
+      personalRects.transition()
         .attr('opacity', function(d) {
-          return (i == d.type) ? 1 : 0.2;
+          return (idx == d.type) ? 1 : 0.2;
+        });
+      barRects.transition()
+        .attr('opacity', function(d) {
+          return (d.id == idx) ? 1 : 0.2;
         });
     }
-      
   }
 }
 
 function redraw() {
   $('#main-container').empty();
+  $('#dow-chart').empty();
+  $('#bar-chart').empty();
   plot();
 }

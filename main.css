@@ -42,3 +42,13 @@ h1 {
 .row, .column {
 	height: 100%;
 }
+
+#bar-chart rect.bar.active {
+	fill: red;
+}
+
+#sort-button {
+	position: absolute;
+	right: 0px;
+	top: 0px;
+}
