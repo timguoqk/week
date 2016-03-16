@@ -1,12 +1,12 @@
 'use strict';
-var timeUseData, timeUseVotedData, data, selectedData, timeUseStats, stats;
+var surveyData, surveyVotedData, personalData, timeUseStats, stats;
 var width, height, svg;
 var types = ['Personal Care', 'Household Activities', 'Caring For & Helping Household (HH) Members', 'Caring For & Helping NonHH Members', 'Work & Work-Related Activities', 'Education', 'Consumer Purchases', 'Professional & Personal Care Services', 'Household Services', 'Government Services & Civic Obligations', 'Eating And Drinking', 'Socializing, Relaxing, And Leisure', 'Sports, Exercise And Recreation', 'Religious and Spiritual Activities', 'Volunteer Activities', 'Telephone Calls', 'Traveling'];
 var dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 $(document).ready(function() {
   $.getJSON('timeuse.json', function(json, textStatus) {
-    timeUseData = json;
+    surveyData = json;
     d3.csv('timesheet.csv', function(d) {
       return {
         startH: moment(d['Start time'], 'hh:mm A').hours(),
@@ -17,17 +17,15 @@ $(document).ready(function() {
         type: types.indexOf(d['Project'])
       };
     }, function(err, rows) {
-      data = rows;
+      personalData = rows;
       // Break events that cross midnight
-      timeUseData = clean(timeUseData);
-      data = clean(data);
+      surveyData = clean(surveyData);
+      personalData = clean(personalData);
 
-      timeUseStats = calcStats(timeUseData);
-      stats = calcStats(data);
+      surveyVotedData = vote(surveyData);
 
-      timeUseVotedData = vote(timeUseData);
-
-      plot();
+      plot('personal', personalData);
+      plot('survey', surveyVotedData);
 
       function clean(ds) {
         ds = _.reject(ds, function(d) { return d.type >= types.length; });
@@ -46,17 +44,6 @@ $(document).ready(function() {
           }
         }
         return ds;
-      }
-
-      function calcStats(ds) {
-        var res = [];
-        for (var i = 0; i < types.length; i ++)
-          res.push({id: i, val: 0});
-        for (var i = 0; i < ds.length; i ++)
-          res[ds[i].type].val += ds[i].stopH - ds[i].startH + (ds[i].stopM - ds[i].startM) / 60;
-        // The last entry is the sum
-        // res.push(res.reduce(function(x, y) { return x + y; }));
-        return res;
       }
 
       function vote(ds) {
@@ -110,15 +97,16 @@ $(document).ready(function() {
   $(window).on('resize', redraw);
 });
 
-function plot() {
-  selectedData = data;
-  width = $('#main-container').width();
-  height = $('#main-container').height();
-  var svg = d3.select('#main-container').append('svg')
+function plot(tag, data) {
+  var selectedData = data;
+  var stats = calcStats(data);
+  width = $('#main-container .' + tag + '.container').width();
+  height = $('#main-container .' + tag + '.container').outerHeight();
+  var svg = d3.select('#main-container .' + tag + '.container').append('svg')
     .attr('width', width)
     .attr('height', height)
   .append('g')
-    .attr('transform', 'translate(50, 50)');
+    .attr('transform', 'translate(35, 35)');
   // Category 20c
   var colors = ["#a1d99b", "#969696", "#636363", "#fdae6b", "#9e9ac8", "#fdd0a2", "#74c476", "#fd8d3c", "#c6dbef", "#d9d9d9", "#6baed6", "#bdbdbd", "#bcbddc", "#dadaeb", "#e6550d", "#c7e9c0", "#756bb1"];
   var colorScale = d3.scale.ordinal()
@@ -126,25 +114,25 @@ function plot() {
     .domain(d3.range(types.length));
   var xScale = d3.scale.linear()
     .domain([0, 24])
-    .range([0, (width - 150) / 2]);
+    .range([0, width - 60]);
   var xAxis = d3.svg.axis()
     .scale(xScale)
     .orient('top')
-    .tickSize(-(height - 100));
+    .tickSize(-(height - 40));
   var yScale = d3.scale.ordinal()
     .domain(d3.range(8))
-    .rangePoints([0, height - 100]);
+    .rangePoints([0, height - 40]);
   var yAxis = d3.svg.axis()
     .scale(yScale)
     .orient('left')
-    .tickSize(-(width - 150) / 2)
+    .tickSize(-width + 60)
     .tickFormat(function(d) {
       return dayOfWeek[d];
     });
-  var personalRects = svg.selectAll('rect.personal')
+  var mainRects = svg.selectAll('rect.' + tag)
     .data(data)
   .enter().append('rect')
-    .attr('class', 'personal')
+    .attr('class', tag)
     .attr('x', function(d) {
       return xScale(d.startH + d.startM / 60);
     })
@@ -154,13 +142,13 @@ function plot() {
     .attr('width', function(d) {
       return xScale(d.stopH - d.startH + (d.stopM - d.startM) / 60);
     })
-    .attr('height', (height - 100) / 7)
+    .attr('height', (height - 40) / 7)
     .attr('fill', function(d) {
       return colorScale(d.type);
     })
     .attr('case-id', function(d, i) { return i; })
     .on('mouseenter', function(d, i) {
-      var rect = $('[case-id=' + i + ']');
+      var rect = $('.' + tag + ' [case-id=' + i + ']');
       $('#tip').html(types[d.type]);
       $('#tip').css({
         'left': rect.offset().left - $('#tip').outerWidth() / 2 + parseInt(rect.attr('width')) / 2,
@@ -193,9 +181,13 @@ function plot() {
     .on('cellout', function() {
       highlight(-1);
     });
-  svg.append('g')
+  $('#legend').empty();
+  d3.select('#legend').append('svg')
+    .attr('width', $('#legend').width())
+    .attr('height', $('#legend').height())
+  .append('g')
+    .attr('transform', 'translate(0, 50)')
     .attr('class', 'legend')
-    .attr('transform', 'translate(' + (xScale.range()[1] + 20).toString() + ', 50)')
     .call(legend);
 
   // dow-chart
@@ -207,11 +199,10 @@ function plot() {
 
   // bar-chart
   var barSvg, barH, barW, barX, barY, barXAxis, barYAxis;
-  barSvg = d3.select('#bar-chart').append('svg')
+  barSvg = d3.select('.' + tag + ' .bar-chart').append('svg')
     .append('g').attr('transform', 'translate(30, 0)');
-  // TODO: use padding
-  barW = $('#bar-chart').width() - 30;
-  barH = $('#bar-chart').height();
+  barW = $('.' + tag + ' .bar-chart').width() - 30;
+  barH = $('.' + tag + ' .bar-chart').height();
   barX = d3.scale.ordinal()
     .domain(_.pluck(stats, 'id'))
     .rangeRoundBands([0, barW], .1);
@@ -245,7 +236,7 @@ function plot() {
     .attr('fill', function(d) { return colorScale(d.id); })
     .on('click', function(d) { highlight(d.id); })
     .on('mouseover', function(d) {
-      var rect = $('[category-id=' + d.id + ']');
+      var rect = $('.' + tag + ' [category-id=' + d.id + ']');
       $('#tip').html(types[d.id] + ': ' + d.val.toFixed(2) + 'h');
       $('#tip').css({
         'left': rect.offset().left - $('#tip').outerWidth() / 2 + parseInt(rect.attr('width')) / 2,
@@ -258,7 +249,7 @@ function plot() {
       highlight(-1);
       $('#tip').toggleClass('active');
     });
-  $('#sort-button').on('click', function() {
+  $('.' + tag + ' #sort-button').on('click', function() {
     if ($(this).hasClass('active'))
       stats = _.sortBy(stats, 'id');
     else
@@ -273,13 +264,13 @@ function plot() {
   function highlight(idx) {
     if (idx == -1) {
       selectedData = data;
-      $('#bar-chart rect.bar').removeClass('active');
-      personalRects.transition().attr('opacity', 1);
+      $('.' + tag + ' .bar-chart rect.bar').removeClass('active');
+      mainRects.transition().attr('opacity', 1);
       barRects.transition().attr('opacity', 1);
     } else {
-      $('#bar-chart rect.bar[category-id=' + idx + ']').addClass('active');
+      $('.' + tag + ' .bar-chart rect.bar[category-id=' + idx + ']').addClass('active');
       selectedData = _.where(data, {type: idx});
-      personalRects.transition()
+      mainRects.transition()
         .attr('opacity', function(d) {
           return (idx == d.type) ? 1 : 0.2;
         });
@@ -289,11 +280,21 @@ function plot() {
         });
     }
   }
+
+  function calcStats(ds) {
+    var res = [];
+    for (var i = 0; i < types.length; i ++)
+      res.push({id: i, val: 0});
+    for (var i = 0; i < ds.length; i ++)
+      res[ds[i].type].val += ds[i].stopH - ds[i].startH + (ds[i].stopM - ds[i].startM) / 60;
+    return res;
+  }
 }
 
 function redraw() {
-  $('#main-container').empty();
-  $('#dow-chart').empty();
-  $('#bar-chart').empty();
-  plot();
+  $('.main-container').empty();
+  $('.dow-chart').empty();
+  $('.bar-chart').empty();
+  plot('personal', personalData);
+  plot('survey', surveyVotedData);
 }

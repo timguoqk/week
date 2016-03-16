@@ -12,13 +12,25 @@
 	<script src="main.js"></script>
 </head>
 <body>
-	<h1>Time: A visualization</h1>
-	<div id="main-container"></div>
-	<div id="line-charts" class="ui grid">
-		<div class="two column row">
-			<div class="column" id="dow-chart"></div>
-			<div class="column" id="bar-chart">
-				<div class="ui teal button" id="sort-button">Sort</div>
+	<header>
+		<h1>Time: A visualization</h1>
+	</header>
+	<div id="main-container">
+		<div class="personal container"></div>
+		<div id="legend"></div>
+		<div class="survey container"></div>
+	</div>
+	<div id="line-charts">
+		<div class="personal">
+			<div class="dow-chart"></div>
+			<div class="bar-chart">
+				<div class="ui teal button sort-button">Sort</div>
+			</div>
+		</div>
+		<div class="survey">
+			<div class="dow-chart"></div>
+			<div class="bar-chart">
+				<div class="ui teal button sort-button">Sort</div>
 			</div>
 		</div>
 	</div>
