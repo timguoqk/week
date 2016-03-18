@@ -17,6 +17,10 @@ header {
 	height: 100%;
 }
 
+rect.personal, rect.survey {
+	transition: all 0.15s ease-in-out;
+}
+
 #legend {
 	width: 20%;
 	height: 100%;
@@ -82,22 +86,9 @@ header {
 	height: 100%;
 }
 
-.bar-chart rect.bar.active {
-	fill: red;
-}
-
 .bar-chart, .dow-chart {
 	height: 100%;
 	width: 50%;
-}
-
-#line-charts>.personal, #line-charts>.survey {
-	display: flex;
-	width: 50%;
-	height: 100%;
-}
-
-.dow-chart, .bar-chart {
 	display: block;
 }
 
@@ -108,4 +99,10 @@ header {
 
 #legend .cell rect.active {
 	transform: scale(1.2);
+}
+
+#textures {
+	width: 0;
+	height: 0;
+	overflow: hidden;
 }

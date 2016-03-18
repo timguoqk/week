@@ -7,13 +7,16 @@
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.12.0/moment.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/d3-legend/1.9.0/d3-legend.min.js"></script>
 	<script src="wad.min.js"></script>
+	<script src="textures.min.js"></script>
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/1.12.1/semantic.min.css">
 	<link rel="stylesheet" href="main.css">
 	<script src="main.js"></script>
+
+	<title>Tim's one-week time tracking</title>
 </head>
 <body>
 	<header>
-		<h1>Time: A visualization</h1>
+		<h1>Tim's One-Week Time Tracking: A Visualization</h1>
 	</header>
 	<div id="main-container">
 		<div class="personal container"></div>
@@ -21,18 +24,11 @@
 		<div class="survey container"></div>
 	</div>
 	<div id="line-charts">
-		<div class="personal">
-			<div class="dow-chart"></div>
-			<div class="bar-chart">
-				<div class="ui teal button sort-button">Sort</div>
-			</div>
-		</div>
-		<div class="survey">
-			<div class="dow-chart"></div>
-			<div class="bar-chart">
-				<div class="ui teal button sort-button">Sort</div>
-			</div>
+		<div class="dow-chart"></div>
+		<div class="bar-chart">
+			<div class="ui teal button sort-button">Sort using personal data</div>
 		</div>
 	</div>
 	<div id="tip" class="ui pointing below label"></div>
+	<div id="textures"></div>
 </body>

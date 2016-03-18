@@ -20,7 +20,8 @@ def main():
             # 'actDur': int(x['TUACTDUR24']),
             # 'cumDur': int(x['TUCUMDUR24']),
             'type': int(x['TUTIER1CODE']) - 1,
-            'week': resp[x['TUCASEID']]
+            'week': resp[x['TUCASEID']],
+            'tag': 'survey'
         } for x in raw]
     with open('timeuse.json', 'w') as f:
         json.dump(data, f)
