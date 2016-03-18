@@ -22,19 +22,32 @@ header {
 	height: 100%;
 }
 
+#legend text.label {
+	margin-bottom: 200px;
+}
+
 #line-charts {
 	display: flex;
 	width: 100%;
 	height: calc(30vh - 30px);
 }
 
-.axis path {
+#main-container .axis path {
 	stroke: black;
 	fill: none;
 }
 
-.axis line {
+#main-container .axis line {
 	stroke: white;
+}
+
+.bar-chart .axis path {
+	fill: none;
+	stroke: black;
+}
+
+.bar-chart .y.axis line {
+	stroke: black;
 }
 
 #tip {
@@ -66,9 +79,7 @@ header {
 }
 
 .sort-button {
-	/* position: absolute !important;
-	right: 0px !important;
-	top: 0px !important; */
+	float: right;
 }
 
 #line-charts>.personal, #line-charts>.survey {

@@ -1,5 +1,5 @@
 'use strict';
-var surveyData, surveyVotedData, personalData, timeUseStats, stats;
+var surveyData, surveyVotedData, personalData, surveyStats, personalStats;
 var width, height, svg;
 var types = ['Personal Care', 'Household Activities', 'Caring For & Helping Household (HH) Members', 'Caring For & Helping NonHH Members', 'Work & Work-Related Activities', 'Education', 'Consumer Purchases', 'Professional & Personal Care Services', 'Household Services', 'Government Services & Civic Obligations', 'Eating And Drinking', 'Socializing, Relaxing, And Leisure', 'Sports, Exercise And Recreation', 'Religious and Spiritual Activities', 'Volunteer Activities', 'Telephone Calls', 'Traveling'];
 var dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -22,10 +22,13 @@ $(document).ready(function() {
       surveyData = clean(surveyData);
       personalData = clean(personalData);
 
+      surveyStats = calcStats(surveyData);
+      personalStats = calcStats(personalData);
+
       surveyVotedData = vote(surveyData);
 
-      plot('personal', personalData);
-      plot('survey', surveyVotedData);
+      plot('personal', personalData, personalStats);
+      plot('survey', surveyVotedData, surveyStats);
 
       function clean(ds) {
         ds = _.reject(ds, function(d) { return d.type >= types.length; });
@@ -92,14 +95,25 @@ $(document).ready(function() {
           return iprev.concat(out);
         }, []);
       }
+
+      function calcStats(ds, num) {
+        var res = [];
+        for (var i = 0; i < types.length; i ++)
+          res.push({id: i, val: 0});
+        for (var i = 0; i < ds.length; i ++)
+          res[ds[i].type].val += ds[i].stopH - ds[i].startH + (ds[i].stopM - ds[i].startM) / 60;
+        // Normalize to a week
+        var multiplier = 24 * 7 / res.reduce(function(prev, curr) { return prev + curr.val; }, 0);
+        res = res.map(function(x) { return {id: x.id, val: x.val * multiplier}; });
+        return res;
+      }
     });
   });
   $(window).on('resize', redraw);
 });
 
-function plot(tag, data) {
+function plot(tag, data, stats) {
   var selectedData = data;
-  var stats = calcStats(data);
   width = $('#main-container .' + tag + '.container').width();
   height = $('#main-container .' + tag + '.container').outerHeight();
   var svg = d3.select('#main-container .' + tag + '.container').append('svg')
@@ -207,7 +221,8 @@ function plot(tag, data) {
     .domain(_.pluck(stats, 'id'))
     .rangeRoundBands([0, barW], .1);
   barY = d3.scale.linear()
-    .domain([0, _.max(_.pluck(stats, 'val'))])
+    // .domain([0, _.max(_.pluck(stats, 'val'))])
+    .domain([0, 90])
     .range([barH - 20, 0]);
   barXAxis = d3.svg.axis()
     .scale(barX)
@@ -249,7 +264,7 @@ function plot(tag, data) {
       highlight(-1);
       $('#tip').toggleClass('active');
     });
-  $('.' + tag + ' #sort-button').on('click', function() {
+  $('.' + tag + ' .sort-button').on('click', function() {
     if ($(this).hasClass('active'))
       stats = _.sortBy(stats, 'id');
     else
@@ -261,7 +276,7 @@ function plot(tag, data) {
     $(this).toggleClass('active')
   });
 
-  function highlight(idx) {
+  highlights[tag] = function (idx) {
     if (idx == -1) {
       selectedData = data;
       $('.' + tag + ' .bar-chart rect.bar').removeClass('active');
@@ -280,15 +295,6 @@ function plot(tag, data) {
         });
     }
   }
-
-  function calcStats(ds) {
-    var res = [];
-    for (var i = 0; i < types.length; i ++)
-      res.push({id: i, val: 0});
-    for (var i = 0; i < ds.length; i ++)
-      res[ds[i].type].val += ds[i].stopH - ds[i].startH + (ds[i].stopM - ds[i].startM) / 60;
-    return res;
-  }
 }
 
 function redraw() {
@@ -297,4 +303,10 @@ function redraw() {
   $('.bar-chart').empty();
   plot('personal', personalData);
   plot('survey', surveyVotedData);
+}
+
+var highlights = {};
+function highlight(i) {
+  highlights['personal'](i);
+  highlights['survey'](i);
 }
