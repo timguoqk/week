@@ -41,6 +41,19 @@ header {
 	stroke: white;
 }
 
+.bar-chart {
+	position: relative;
+}
+
+.bar-chart>svg, .bar-chart>.sort-button {
+	position: absolute;
+}
+
+.bar-chart>.sort-button {
+	z-index: 99;
+	right: 0;
+}
+
 .bar-chart .axis path {
 	fill: none;
 	stroke: black;
@@ -76,10 +89,6 @@ header {
 .bar-chart, .dow-chart {
 	height: 100%;
 	width: 50%;
-}
-
-.sort-button {
-	float: right;
 }
 
 #line-charts>.personal, #line-charts>.survey {
