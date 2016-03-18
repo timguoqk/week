@@ -1,6 +1,7 @@
 'use strict';
 var surveyData, surveyVotedData, personalData, surveyStats, personalStats;
 var width, height, svg;
+var colorScale;
 var types = ['Personal Care', 'Household Activities', 'Caring For & Helping Household (HH) Members', 'Caring For & Helping NonHH Members', 'Work & Work-Related Activities', 'Education', 'Consumer Purchases', 'Professional & Personal Care Services', 'Household Services', 'Government Services & Civic Obligations', 'Eating And Drinking', 'Socializing, Relaxing, And Leisure', 'Sports, Exercise And Recreation', 'Religious and Spiritual Activities', 'Volunteer Activities', 'Telephone Calls', 'Traveling'];
 var dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -29,6 +30,7 @@ $(document).ready(function() {
 
       plot('personal', personalData, personalStats);
       plot('survey', surveyVotedData, surveyStats);
+      plotLegend();
 
       function clean(ds) {
         ds = _.reject(ds, function(d) { return d.type >= types.length; });
@@ -108,6 +110,7 @@ $(document).ready(function() {
         return res;
       }
     });
+    init();
   });
   $(window).on('resize', redraw);
 });
@@ -121,11 +124,6 @@ function plot(tag, data, stats) {
     .attr('height', height)
   .append('g')
     .attr('transform', 'translate(35, 35)');
-  // Category 20c
-  var colors = ["#a1d99b", "#969696", "#636363", "#fdae6b", "#9e9ac8", "#fdd0a2", "#74c476", "#fd8d3c", "#c6dbef", "#d9d9d9", "#6baed6", "#bdbdbd", "#bcbddc", "#dadaeb", "#e6550d", "#c7e9c0", "#756bb1"];
-  var colorScale = d3.scale.ordinal()
-    .range(colors)
-    .domain(d3.range(types.length));
   var xScale = d3.scale.linear()
     .domain([0, 24])
     .range([0, width - 60]);
@@ -184,25 +182,6 @@ function plot(tag, data, stats) {
   svg.append('g')
     .attr('class', 'axis yAxis')
     .call(yAxis);
-
-  // Legend
-  var legend = d3.legend.color()
-    .scale(colorScale)
-    .labels(types)
-    .on('cellover', function(i) {
-      highlight(i);
-    })
-    .on('cellout', function() {
-      highlight(-1);
-    });
-  $('#legend').empty();
-  d3.select('#legend').append('svg')
-    .attr('width', $('#legend').width())
-    .attr('height', $('#legend').height())
-  .append('g')
-    .attr('transform', 'translate(0, 50)')
-    .attr('class', 'legend')
-    .call(legend);
 
   // dow-chart
   var wdSvg, wdX, wdY, wdXAxis, wdYAxis;
@@ -297,16 +276,50 @@ function plot(tag, data, stats) {
   }
 }
 
+function plotLegend() {
+  var legend = d3.legend.color()
+    .scale(colorScale)
+    .labels(types)
+    .shapePadding(10)
+    .on('cellover', function(i) {
+      highlight(i);
+    })
+    .on('cellout', function() {
+      highlight(-1);
+    });
+  $('#legend').empty();
+  d3.select('#legend')
+  .append('svg')
+    .attr('width', $('#legend').width())
+    .attr('height', $('#legend').height())
+  .append('g')
+    .attr('transform', 'translate(0, 35)')
+    .call(legend);
+}
+
+function init() {
+  // Category 20c
+  var colors = ["#a1d99b", "#969696", "#636363", "#fdae6b", "#9e9ac8", "#fdd0a2", "#74c476", "#fd8d3c", "#c6dbef", "#d9d9d9", "#6baed6", "#bdbdbd", "#bcbddc", "#dadaeb", "#e6550d", "#c7e9c0", "#756bb1"];
+  colorScale = d3.scale.ordinal()
+    .range(colors)
+    .domain(d3.range(types.length));
+}
+
 function redraw() {
-  $('.main-container').empty();
-  $('.dow-chart').empty();
-  $('.bar-chart').empty();
-  plot('personal', personalData);
-  plot('survey', surveyVotedData);
+  // $('.main-container').empty();
+  // $('.dow-chart').empty();
+  // $('.bar-chart').empty();
+  // plot('personal', personalData, personalStats);
+  // plot('survey', surveyVotedData, surveyStats);
+  // plotLegend();
 }
 
 var highlights = {};
 function highlight(i) {
   highlights['personal'](i);
   highlights['survey'](i);
+  if (i == -1)
+    d3.selectAll('.legendCells rect.active').classed('active', false);
+  else
+    d3.selectAll('.legendCells>g.cell:nth-of-type(' + (i + 1) + ') rect').classed('active', true);
 }

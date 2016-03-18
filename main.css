@@ -91,3 +91,12 @@ header {
 .dow-chart, .bar-chart {
 	display: block;
 }
+
+#legend .cell rect {
+	transform: scale(1);
+	transition: all ease-in-out 0.25s;
+}
+
+#legend .cell rect.active {
+	transform: scale(1.2);
+}
