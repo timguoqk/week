@@ -247,6 +247,14 @@ function plotLegend() {
   .append('g')
     .attr('transform', 'translate(0, 35)')
     .call(legend);
+
+  var svgBox = $('#legend>svg').get(0).getBBox();
+  var dh = Math.round(($('#legend').height() - svgBox.height) / 2);
+  var dw = Math.round(($('#legend').width() - svgBox.width) / 2);
+  $('#legend').css('padding-top', `${dh}px`)
+    .css('padding-bottom', `${dh}px`)
+    .css('padding-left', `${dw}px`)
+    .css('padding-right', `${dw}px`);
 }
 
 function init() {

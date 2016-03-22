@@ -26,10 +26,6 @@ rect.personal, rect.survey {
 	height: 100%;
 }
 
-#legend text.label {
-	margin-bottom: 200px;
-}
-
 #line-charts {
 	display: flex;
 	width: 100%;
