@@ -12,11 +12,12 @@
 	<link rel="stylesheet" href="main.css">
 	<script src="main.js"></script>
 
-	<title>Tim's one-week time tracking</title>
+	<title>WEEK</title>
 </head>
 <body>
 	<header>
 		<h1>Tim's One-Week Time Tracking: A Visualization</h1>
+		<div class="ui blue button">About</div>
 	</header>
 	<div id="main-container">
 		<div class="personal container"></div>
@@ -31,4 +32,14 @@
 	</div>
 	<div id="tip" class="ui pointing below label"></div>
 	<div id="textures"></div>
+	<div class="ui basic modal" id="about">
+		<div class="close icon"></div>
+		<div class="header">About</div>
+		<div class="content">
+			<p>The grid on the left shows my time usage, while the grid on the right shows time usage of ordinary full-time college students, using data from <a href="http://www.bls.gov/tus/datafiles_2014.htm">American Time Use Survey 2014</a></p>
+			<p>The line chart on the bottom left shows how much time I spent on each category for each day of the week.</p>
+			<p>The bar chart on the bottom right compares the total time I spent on each category of activities (bars with solid color) and the counterpart of students in the Survey (bars with textures).</p>
+			<p>The visualization is written in D3.js. Source code is available on <a href="https://github.com/timguoqk/week">Github</a>.</p>
+		</div>
+	</div>
 </body>

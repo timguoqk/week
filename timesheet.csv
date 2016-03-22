@@ -1,216 +1,162 @@
 Date,Start time,End time,Duration,Project
-3/9/16,12:00 AM,12:36 AM,0:36:00,Education
-3/9/16,12:36 AM,12:44 AM,0:08:00,Personal Care
-3/9/16,12:44 AM,1:34 AM,0:50:00,"Socializing, Relaxing, And Leisure"
-3/9/16,1:34 AM,9:43 AM,8:09:00,Personal Care
-3/9/16,9:43 AM,9:55 AM,0:12:00,Traveling
-3/9/16,9:55 AM,10:05 AM,0:10:00,Eating And Drinking
-3/9/16,10:05 AM,10:15 AM,0:10:00,"Socializing, Relaxing, And Leisure"
-3/9/16,10:15 AM,10:50 AM,0:35:00,Education
-3/9/16,10:50 AM,10:59 AM,0:09:00,Personal Care
-3/9/16,10:59 AM,11:11 AM,0:12:00,Traveling
-3/9/16,11:11 AM,11:20 AM,0:09:00,Eating And Drinking
-3/9/16,11:20 AM,11:56 AM,0:36:00,"Socializing, Relaxing, And Leisure"
-3/9/16,11:56 AM,12:35 PM,0:39:00,Education
-3/9/16,12:35 PM,12:37 PM,0:02:00,Consumer Purchases
-3/9/16,12:37 PM,12:52 PM,0:15:00,Education
-3/9/16,12:52 PM,1:01 PM,0:09:00,Traveling
-3/9/16,1:01 PM,1:50 PM,0:49:00,Education
-3/9/16,1:50 PM,1:57 PM,0:07:00,Traveling
-3/9/16,1:57 PM,2:15 PM,0:18:00,Consumer Purchases
-3/9/16,2:15 PM,2:30 PM,0:15:00,Eating And Drinking
-3/9/16,2:30 PM,2:54 PM,0:24:00,Education
-3/9/16,2:54 PM,3:05 PM,0:11:00,Traveling
-3/9/16,3:05 PM,3:39 PM,0:34:00,Education
-3/9/16,3:39 PM,3:45 PM,0:06:00,Traveling
-3/9/16,3:45 PM,4:16 PM,0:31:00,"Sports, Exercise And Recreation"
-3/9/16,4:16 PM,4:40 PM,0:24:00,Traveling
-3/9/16,4:40 PM,4:55 PM,0:15:00,Education
-3/9/16,4:55 PM,5:57 PM,1:02:00,Education
-3/9/16,5:56 PM,6:06 PM,0:10:00,Traveling
-3/9/16,6:06 PM,7:15 PM,1:09:00,Education
-3/9/16,7:15 PM,7:38 PM,0:23:00,Traveling
-3/9/16,7:38 PM,8:14 PM,0:36:00,Eating And Drinking
-3/9/16,8:14 PM,8:42 PM,0:28:00,Traveling
-3/9/16,8:42 PM,9:05 PM,0:23:00,Education
-3/9/16,9:05 PM,9:10 PM,0:05:00,Traveling
-3/9/16,9:10 PM,9:18 PM,0:08:00,Household Activities
-3/9/16,9:18 PM,11:50 PM,2:32:00,"Socializing, Relaxing, And Leisure"
-3/9/16,11:50 PM,12:45 AM,0:55:00,Telephone Calls
-3/10/16,12:45 AM,12:50 AM,0:05:00,Education
-3/10/16,12:50 AM,1:15 AM,0:25:00,Personal Care
-3/10/16,1:15 AM,1:39 AM,0:24:00,"Socializing, Relaxing, And Leisure"
-3/10/16,1:39 AM,10:00 AM,8:21:00,Personal Care
-3/10/16,10:00 AM,10:05 AM,0:05:00,Household Activities
-3/10/16,10:05 AM,10:10 AM,0:05:00,Eating And Drinking
-3/10/16,10:10 AM,10:41 AM,0:31:00,"Socializing, Relaxing, And Leisure"
-3/10/16,10:41 AM,11:08 AM,0:27:00,Education
-3/10/16,11:08 AM,11:13 AM,0:05:00,Personal Care
-3/10/16,11:14 AM,11:16 AM,0:02:00,Household Activities
-3/10/16,11:16 AM,11:27 AM,0:11:00,Traveling
-3/10/16,11:27 AM,11:50 AM,0:23:00,Eating And Drinking
-3/10/16,11:50 AM,11:54 AM,0:04:00,Traveling
-3/10/16,11:54 AM,12:45 PM,0:51:00,Education
-3/10/16,12:46 PM,12:52 PM,0:06:00,Personal Care
-3/10/16,12:52 PM,12:59 PM,0:07:00,"Socializing, Relaxing, And Leisure"
-3/10/16,12:59 PM,2:24 PM,1:25:00,Education
-3/10/16,2:24 PM,3:18 PM,0:54:00,Professional & Personal Care Services
-3/10/16,3:18 PM,3:33 PM,0:15:00,Professional & Personal Care Services
-3/10/16,3:33 PM,5:40 PM,2:07:00,Education
-3/10/16,5:40 PM,5:50 PM,0:10:00,Traveling
-3/10/16,5:50 PM,6:30 PM,0:40:00,Eating And Drinking
-3/10/16,6:30 PM,6:35 PM,0:05:00,Traveling
-3/10/16,6:35 PM,7:25 PM,0:50:00,Education
-3/10/16,7:25 PM,7:34 PM,0:09:00,Personal Care
-3/10/16,7:34 PM,9:00 PM,1:26:00,Education
-3/10/16,9:00 PM,9:10 PM,0:10:00,"Socializing, Relaxing, And Leisure"
-3/10/16,9:10 PM,9:20 PM,0:10:00,Telephone Calls
-3/10/16,9:20 PM,11:00 PM,1:40:00,Personal Care
-3/10/16,11:00 PM,11:17 PM,0:17:00,Traveling
-3/10/16,11:17 PM,11:40 PM,0:23:00,Personal Care
-3/10/16,11:40 PM,11:47 PM,0:07:00,"Socializing, Relaxing, And Leisure"
-3/10/16,11:46 PM,12:05 AM,0:19:00,"Socializing, Relaxing, And Leisure"
-3/11/16,12:05 AM,12:20 AM,0:15:00,Personal Care
-3/11/16,12:20 AM,12:58 AM,0:38:00,"Socializing, Relaxing, And Leisure"
-3/11/16,12:58 AM,9:24 AM,8:26:00,Personal Care
-3/11/16,9:24 AM,9:30 AM,0:06:00,Traveling
-3/11/16,9:30 AM,9:43 AM,0:13:00,Education
-3/11/16,9:43 AM,9:50 AM,0:07:00,Traveling
-3/11/16,9:50 AM,10:00 AM,0:10:00,"Socializing, Relaxing, And Leisure"
-3/11/16,10:09 AM,10:44 AM,0:35:00,Education
-3/11/16,10:44 AM,10:46 AM,0:02:00,Traveling
-3/11/16,10:46 AM,10:50 AM,0:04:00,Professional & Personal Care Services
-3/11/16,10:50 AM,10:55 AM,0:05:00,Traveling
-3/11/16,10:55 AM,11:13 AM,0:18:00,Education
-3/11/16,11:13 AM,11:18 AM,0:05:00,Consumer Purchases
-3/11/16,11:18 AM,11:34 AM,0:16:00,Eating And Drinking
-3/11/16,11:34 AM,11:41 AM,0:07:00,Traveling
-3/11/16,11:41 AM,12:52 PM,1:11:00,Education
-3/11/16,12:52 PM,12:58 PM,0:06:00,Traveling
-3/11/16,12:58 PM,1:53 PM,0:55:00,Education
-3/11/16,1:54 PM,2:05 PM,0:11:00,Traveling
-3/11/16,2:05 PM,2:13 PM,0:08:00,Personal Care
-3/11/16,2:13 PM,2:36 PM,0:23:00,"Sports, Exercise And Recreation"
-3/11/16,2:36 PM,2:48 PM,0:12:00,Telephone Calls
-3/11/16,2:48 PM,3:00 PM,0:12:00,"Sports, Exercise And Recreation"
-3/11/16,3:00 PM,3:08 PM,0:08:00,Traveling
-3/11/16,3:08 PM,3:17 PM,0:09:00,Education
-3/11/16,3:17 PM,3:30 PM,0:13:00,Work & Work-Related Activities
-3/11/16,3:30 PM,3:33 PM,0:03:00,Education
-3/11/16,3:33 PM,3:49 PM,0:16:00,Traveling
-3/11/16,3:49 PM,4:50 PM,1:01:00,"Socializing, Relaxing, And Leisure"
-3/11/16,4:50 PM,5:34 PM,0:44:00,Education
-3/11/16,5:35 PM,5:42 PM,0:07:00,"Socializing, Relaxing, And Leisure"
-3/11/16,5:43 PM,6:11 PM,0:28:00,Education
-3/11/16,6:11 PM,6:17 PM,0:06:00,Personal Care
-3/11/16,6:17 PM,6:28 PM,0:11:00,Consumer Purchases
-3/11/16,6:28 PM,6:42 PM,0:14:00,Eating And Drinking
-3/11/16,6:42 PM,6:51 PM,0:09:00,Traveling
-3/11/16,6:51 PM,7:40 PM,0:49:00,Education
-3/11/16,7:40 PM,7:55 PM,0:15:00,Traveling
-3/11/16,7:55 PM,10:43 PM,2:48:00,"Socializing, Relaxing, And Leisure"
-3/11/16,10:43 PM,10:53 PM,0:10:00,Traveling
-3/11/16,10:53 PM,11:17 PM,0:24:00,Personal Care
-3/11/16,11:17 PM,2:05 AM,2:48:00,"Socializing, Relaxing, And Leisure"
-3/12/16,2:05 AM,9:05 AM,7:00:00,Personal Care
-3/12/16,9:05 AM,9:42 AM,0:37:00,"Socializing, Relaxing, And Leisure"
-3/12/16,9:42 AM,10:14 AM,0:32:00,Personal Care
-3/12/16,10:14 AM,11:10 AM,0:56:00,"Socializing, Relaxing, And Leisure"
-3/12/16,11:10 AM,11:43 AM,0:33:00,Education
-3/12/16,11:44 AM,11:50 AM,0:06:00,"Socializing, Relaxing, And Leisure"
-3/12/16,11:50 AM,11:58 AM,0:08:00,Traveling
-3/12/16,11:58 AM,12:30 PM,0:32:00,Professional & Personal Care Services
-3/12/16,12:30 PM,12:36 PM,0:06:00,Traveling
-3/12/16,12:36 PM,12:49 PM,0:13:00,Eating And Drinking
-3/12/16,12:49 PM,1:00 PM,0:11:00,Traveling
-3/12/16,1:00 PM,1:55 PM,0:55:00,Education
-3/12/16,1:55 PM,2:53 PM,0:58:00,"Socializing, Relaxing, And Leisure"
-3/12/16,2:53 PM,2:58 PM,0:05:00,Personal Care
-3/12/16,2:58 PM,3:40 PM,0:42:00,Education
-3/12/16,3:40 PM,4:19 PM,0:39:00,Volunteer Activities
-3/12/16,4:19 PM,5:17 PM,0:58:00,"Socializing, Relaxing, And Leisure"
-3/12/16,5:18 PM,5:59 PM,0:41:00,Volunteer Activities
-3/12/16,5:59 PM,6:10 PM,0:11:00,Traveling
-3/12/16,6:10 PM,6:20 PM,0:10:00,Consumer Purchases
-3/12/16,6:20 PM,6:30 PM,0:10:00,Eating And Drinking
-3/12/16,6:30 PM,6:49 PM,0:19:00,Traveling
-3/12/16,6:49 PM,8:37 PM,1:48:00,Education
-3/12/16,8:37 PM,8:43 PM,0:06:00,Traveling
-3/12/16,8:43 PM,11:13 PM,2:30:00,"Socializing, Relaxing, And Leisure"
-3/12/16,11:13 PM,11:58 PM,0:45:00,"Socializing, Relaxing, And Leisure"
-3/12/16,11:58 PM,12:05 AM,0:07:00,Personal Care
-3/13/16,12:05 AM,12:40 AM,0:35:00,Telephone Calls
-3/13/16,12:40 AM,1:01 AM,0:21:00,Education
-3/13/16,1:01 AM,1:09 AM,0:08:00,Personal Care
-3/13/16,1:09 AM,1:36 AM,0:27:00,"Socializing, Relaxing, And Leisure"
-3/13/16,1:36 AM,11:15 AM,8:39:00,Personal Care
-3/13/16,11:16 AM,12:00 PM,0:44:00,"Socializing, Relaxing, And Leisure"
-3/13/16,12:00 PM,12:15 PM,0:15:00,Personal Care
-3/13/16,12:15 PM,12:22 PM,0:07:00,Traveling
-3/13/16,12:22 PM,12:27 PM,0:05:00,Consumer Purchases
-3/13/16,12:27 PM,12:47 PM,0:20:00,Eating And Drinking
-3/13/16,12:47 PM,12:53 PM,0:06:00,Traveling
-3/13/16,12:53 PM,1:38 PM,0:45:00,Education
-3/13/16,1:39 PM,1:51 PM,0:12:00,Personal Care
-3/13/16,1:52 PM,2:33 PM,0:41:00,"Sports, Exercise And Recreation"
-3/13/16,2:33 PM,2:38 PM,0:05:00,Traveling
-3/13/16,2:38 PM,2:54 PM,0:16:00,Education
-3/13/16,2:54 PM,3:04 PM,0:10:00,Traveling
-3/13/16,3:04 PM,3:15 PM,0:11:00,Household Activities
-3/13/16,3:15 PM,3:22 PM,0:07:00,"Socializing, Relaxing, And Leisure"
-3/13/16,3:22 PM,3:55 PM,0:33:00,Education
-3/13/16,3:55 PM,4:03 PM,0:08:00,Household Activities
-3/13/16,4:03 PM,5:07 PM,1:04:00,Education
-3/13/16,5:07 PM,5:28 PM,0:21:00,Household Activities
-3/13/16,5:28 PM,7:04 PM,1:36:00,Education
-3/13/16,7:04 PM,7:10 PM,0:06:00,Traveling
-3/13/16,7:10 PM,8:00 PM,0:50:00,Eating And Drinking
-3/13/16,8:00 PM,8:05 PM,0:05:00,Traveling
-3/13/16,8:05 PM,10:01 PM,1:56:00,Education
-3/13/16,10:01 PM,10:09 PM,0:08:00,"Socializing, Relaxing, And Leisure"
-3/13/16,10:09 PM,10:30 PM,0:21:00,Education
-3/13/16,10:30 PM,10:35 PM,0:05:00,Traveling
-3/13/16,10:35 PM,11:04 PM,0:29:00,"Socializing, Relaxing, And Leisure"
-3/13/16,11:04 PM,11:49 PM,0:45:00,Education
-3/13/16,11:49 PM,1:37 AM,1:48:00,"Socializing, Relaxing, And Leisure"
-3/14/16,1:37 AM,9:15 AM,7:38:00,Personal Care
-3/14/16,9:15 AM,9:43 AM,0:28:00,Personal Care
-3/14/16,9:43 AM,9:50 AM,0:07:00,Eating And Drinking
-3/14/16,9:50 AM,10:02 AM,0:12:00,Traveling
-3/14/16,10:02 AM,11:03 AM,1:01:00,Education
-3/14/16,11:02 AM,11:15 AM,0:13:00,"Socializing, Relaxing, And Leisure"
-3/14/16,11:15 AM,11:30 AM,0:15:00,Education
-3/14/16,11:30 AM,11:39 AM,0:09:00,Consumer Purchases
-3/14/16,11:39 AM,11:54 AM,0:15:00,Education
-3/14/16,11:55 AM,12:09 PM,0:14:00,Eating And Drinking
-3/14/16,12:09 PM,1:44 PM,1:35:00,Education
-3/14/16,1:44 PM,1:52 PM,0:08:00,Traveling
-3/14/16,1:52 PM,3:20 PM,1:28:00,Education
-3/14/16,3:20 PM,3:35 PM,0:15:00,"Socializing, Relaxing, And Leisure"
-3/14/16,3:35 PM,3:55 PM,0:20:00,Education
-3/14/16,3:55 PM,4:00 PM,0:05:00,Traveling
-3/14/16,4:00 PM,5:35 PM,1:35:00,Education
-3/14/16,5:35 PM,5:43 PM,0:08:00,Traveling
-3/14/16,5:43 PM,6:35 PM,0:52:00,"Sports, Exercise And Recreation"
-3/14/16,6:35 PM,7:05 PM,0:30:00,Eating And Drinking
-3/14/16,6:35 PM,6:45 PM,0:10:00,Traveling
-3/14/16,7:05 PM,9:26 PM,2:21:00,Education
-3/14/16,9:27 PM,10:33 PM,1:06:00,"Socializing, Relaxing, And Leisure"
-3/14/16,10:33 PM,12:53 AM,2:20:00,Education
-3/15/16,12:53 AM,2:26 AM,1:33:00,"Socializing, Relaxing, And Leisure"
-3/15/16,2:26 AM,10:25 AM,7:59:00,Personal Care
-3/15/16,10:25 AM,11:30 AM,1:05:00,Education
-3/15/16,11:30 AM,11:34 AM,0:04:00,Personal Care
-3/15/16,11:34 AM,11:40 AM,0:06:00,Traveling
-3/15/16,11:40 AM,11:58 AM,0:18:00,Consumer Purchases
-3/15/16,11:58 AM,12:25 PM,0:27:00,Eating And Drinking
-3/15/16,12:26 PM,2:21 PM,1:55:00,Education
-3/15/16,2:21 PM,2:30 PM,0:09:00,Traveling
-3/15/16,2:30 PM,3:25 PM,0:55:00,"Sports, Exercise And Recreation"
-3/15/16,3:25 PM,3:37 PM,0:12:00,Traveling
-3/15/16,3:37 PM,6:25 PM,2:48:00,Education
-3/15/16,6:26 PM,6:45 PM,0:19:00,Eating And Drinking
-3/15/16,6:45 PM,8:35 PM,1:50:00,Education
-3/15/16,8:35 PM,8:43 PM,0:08:00,Traveling
-3/15/16,8:43 PM,11:00 PM,2:17:00,"Socializing, Relaxing, And Leisure"
-3/15/16,11:00 PM,11:59 PM,0:59:00,Education
+3/2/16,12:00 AM,9:40 AM,9:40:00,Personal Care
+3/2/16,9:40 AM,9:55 AM,0:15:00,Eating And Drinking
+3/2/16,9:55 AM,10:00 AM,0:05:00,Household Activities
+3/2/16,10:00 AM,10:10 AM,0:10:00,Traveling
+3/2/16,10:10 AM,10:50 AM,0:40:00,Education
+3/2/16,10:50 AM,10:52 AM,0:02:00,Traveling
+3/2/16,10:52 AM,11:25 AM,0:33:00,Eating And Drinking
+3/2/16,11:25 AM,12:50 PM,1:25:00,Education
+3/2/16,12:50 PM,12:55 PM,0:05:00,Traveling
+3/2/16,12:55 PM,3:00 PM,2:05:00,Education
+3/2/16,3:00 PM,3:30 PM,0:30:00,Work & Work-Related Activities
+3/2/16,3:30 PM,5:00 PM,1:30:00,"Socializing, Relaxing, And Leisure"
+3/2/16,5:00 PM,5:30 PM,0:30:00,Telephone Calls
+3/2/16,5:30 PM,7:15 PM,1:45:00,"Socializing, Relaxing, And Leisure"
+3/2/16,7:15 PM,7:45 PM,0:30:00,Eating And Drinking
+3/2/16,7:45 PM,9:30 PM,1:45:00,Education
+3/2/16,9:30 PM,10:20 PM,0:50:00,Telephone Calls
+3/2/16,10:20 PM,11:20 PM,1:00:00,"Socializing, Relaxing, And Leisure"
+3/2/16,11:20 PM,12:40 AM,1:20:00,Education
+3/3/16,12:40 AM,1:15 AM,0:35:00,Personal Care
+3/3/16,1:15 AM,1:45 AM,0:30:00,"Socializing, Relaxing, And Leisure"
+3/3/16,1:45 AM,9:20 AM,7:35:00,Personal Care
+3/3/16,9:20 AM,10:00 AM,0:40:00,"Socializing, Relaxing, And Leisure"
+3/3/16,10:00 AM,10:15 AM,0:15:00,Household Activities
+3/3/16,10:15 AM,10:30 AM,0:15:00,Eating And Drinking
+3/3/16,10:30 AM,11:10 AM,0:40:00,Education
+3/3/16,11:10 AM,11:15 AM,0:05:00,Traveling
+3/3/16,11:15 AM,11:55 AM,0:40:00,Eating And Drinking
+3/3/16,11:55 AM,12:25 PM,0:30:00,Education
+3/3/16,12:25 PM,12:50 PM,0:25:00,"Socializing, Relaxing, And Leisure"
+3/3/16,12:50 PM,2:23 PM,1:33:00,Education
+3/3/16,2:23 PM,2:32 PM,0:09:00,Traveling
+3/3/16,2:32 PM,2:36 PM,0:04:00,Personal Care
+3/3/16,2:36 PM,3:15 PM,0:39:00,"Sports, Exercise And Recreation"
+3/3/16,3:15 PM,3:22 PM,0:07:00,Consumer Purchases
+3/3/16,3:22 PM,3:30 PM,0:08:00,Professional & Personal Care Services
+3/3/16,3:30 PM,6:00 PM,2:30:00,Education
+3/3/16,6:00 PM,6:30 PM,0:30:00,Eating And Drinking
+3/3/16,6:30 PM,6:50 PM,0:20:00,"Socializing, Relaxing, And Leisure"
+3/3/16,6:50 PM,6:56 PM,0:06:00,Traveling
+3/3/16,6:56 PM,8:02 PM,1:06:00,"Socializing, Relaxing, And Leisure"
+3/3/16,8:02 PM,8:19 PM,0:17:00,Education
+3/3/16,8:19 PM,8:30 PM,0:11:00,"Socializing, Relaxing, And Leisure"
+3/3/16,8:30 PM,9:20 PM,0:50:00,Education
+3/3/16,9:20 PM,10:50 PM,1:30:00,"Socializing, Relaxing, And Leisure"
+3/3/16,10:50 PM,12:00 AM,1:10:00,Personal Care
+3/4/16,12:00 AM,12:20 AM,0:20:00,Personal Care
+3/4/16,12:20 AM,1:05 AM,0:45:00,Education
+3/4/16,1:05 AM,9:05 AM,8:00:00,Personal Care
+3/4/16,9:05 AM,9:15 AM,0:10:00,Personal Care
+3/4/16,9:15 AM,9:24 AM,0:09:00,Eating And Drinking
+3/4/16,9:24 AM,9:32 AM,0:08:00,Traveling
+3/4/16,9:32 AM,10:50 AM,1:18:00,Education
+3/4/16,10:50 AM,10:55 AM,0:05:00,Traveling
+3/4/16,10:55 AM,11:22 AM,0:27:00,Eating And Drinking
+3/4/16,11:22 AM,11:27 AM,0:05:00,Traveling
+3/4/16,11:27 AM,1:00 PM,1:33:00,"Socializing, Relaxing, And Leisure"
+3/4/16,1:00 PM,3:20 PM,2:20:00,Education
+3/4/16,3:20 PM,3:35 PM,0:15:00,Work & Work-Related Activities
+3/4/16,3:35 PM,3:48 PM,0:13:00,Education
+3/4/16,3:48 PM,4:05 PM,0:17:00,Traveling
+3/4/16,4:05 PM,5:16 PM,1:11:00,"Sports, Exercise And Recreation"
+3/4/16,5:16 PM,5:30 PM,0:14:00,Traveling
+3/4/16,5:30 PM,5:40 PM,0:10:00,"Socializing, Relaxing, And Leisure"
+3/4/16,5:40 PM,5:55 PM,0:15:00,Traveling
+3/4/16,5:55 PM,7:35 PM,1:40:00,Personal Care
+3/4/16,7:35 PM,8:00 PM,0:25:00,"Socializing, Relaxing, And Leisure"
+3/4/16,8:00 PM,8:10 PM,0:10:00,Traveling
+3/4/16,8:10 PM,12:10 AM,4:00:00,"Socializing, Relaxing, And Leisure"
+3/5/16,12:10 AM,12:40 AM,0:30:00,Personal Care
+3/5/16,12:40 AM,1:30 AM,0:50:00,"Socializing, Relaxing, And Leisure"
+3/5/16,1:30 AM,10:00 AM,8:30:00,Personal Care
+3/5/16,10:00 AM,10:25 AM,0:25:00,Personal Care
+3/5/16,10:25 AM,11:25 AM,1:00:00,Education
+3/5/16,11:25 AM,12:45 PM,1:20:00,"Socializing, Relaxing, And Leisure"
+3/5/16,12:45 PM,12:50 PM,0:05:00,Traveling
+3/5/16,12:50 PM,1:00 PM,0:10:00,Eating And Drinking
+3/5/16,1:00 PM,1:10 PM,0:10:00,Consumer Purchases
+3/5/16,1:10 PM,1:45 PM,0:35:00,"Socializing, Relaxing, And Leisure"
+3/5/16,1:45 PM,3:50 PM,2:05:00,Education
+3/5/16,3:50 PM,5:21 PM,1:31:00,Education
+3/5/16,5:21 PM,5:33 PM,0:12:00,"Socializing, Relaxing, And Leisure"
+3/5/16,5:33 PM,6:24 PM,0:51:00,Education
+3/5/16,6:24 PM,6:39 PM,0:15:00,Traveling
+3/5/16,6:39 PM,7:00 PM,0:21:00,Eating And Drinking
+3/5/16,7:00 PM,7:13 PM,0:13:00,Traveling
+3/5/16,7:13 PM,8:15 PM,1:02:00,"Socializing, Relaxing, And Leisure"
+3/5/16,8:15 PM,9:27 PM,1:12:00,Telephone Calls
+3/5/16,9:27 PM,9:35 PM,0:08:00,Personal Care
+3/5/16,9:35 PM,9:43 PM,0:08:00,Traveling
+3/5/16,9:43 PM,10:33 PM,0:50:00,"Sports, Exercise And Recreation"
+3/5/16,10:33 PM,10:43 PM,0:10:00,Traveling
+3/5/16,10:43 PM,11:30 PM,0:47:00,"Socializing, Relaxing, And Leisure"
+3/5/16,11:30 PM,11:59 PM,0:29:00,Education
+3/5/16,11:59 PM,1:19 AM,1:20:00,"Socializing, Relaxing, And Leisure"
+3/6/16,1:19 AM,1:53 AM,0:34:00,"Socializing, Relaxing, And Leisure"
+3/6/16,1:53 AM,10:20 AM,8:27:00,Personal Care
+3/6/16,10:20 AM,11:01 AM,0:41:00,"Socializing, Relaxing, And Leisure"
+3/6/16,11:01 AM,11:07 AM,0:06:00,Personal Care
+3/6/16,11:07 AM,11:17 AM,0:10:00,Eating And Drinking
+3/6/16,11:17 AM,11:51 AM,0:34:00,Personal Care
+3/6/16,11:51 AM,11:59 AM,0:08:00,Traveling
+3/6/16,11:59 AM,12:19 PM,0:20:00,Personal Care
+3/6/16,12:19 PM,12:33 PM,0:14:00,Eating And Drinking
+3/6/16,12:33 PM,2:17 PM,1:44:00,Traveling
+3/6/16,2:17 PM,4:37 PM,2:20:00,Caring For & Helping NonHH Members
+3/6/16,4:37 PM,6:00 PM,1:23:00,Traveling
+3/6/16,6:00 PM,6:30 PM,0:30:00,Eating And Drinking
+3/6/16,6:30 PM,6:35 PM,0:05:00,Traveling
+3/6/16,6:35 PM,7:30 PM,0:55:00,"Socializing, Relaxing, And Leisure"
+3/6/16,7:30 PM,12:30 AM,5:00:00,Education
+3/7/16,12:30 AM,1:15 AM,0:45:00,"Socializing, Relaxing, And Leisure"
+3/7/16,1:15 AM,9:40 AM,8:25:00,Personal Care
+3/7/16,9:40 AM,9:45 AM,0:05:00,Traveling
+3/7/16,9:45 AM,9:55 AM,0:10:00,Consumer Purchases
+3/7/16,9:55 AM,10:05 AM,0:10:00,Eating And Drinking
+3/7/16,10:05 AM,10:50 AM,0:45:00,Education
+3/7/16,10:50 AM,10:55 AM,0:05:00,Traveling
+3/7/16,10:55 AM,11:20 AM,0:25:00,Education
+3/7/16,11:20 AM,11:25 AM,0:05:00,Consumer Purchases
+3/7/16,11:25 AM,11:35 AM,0:10:00,Eating And Drinking
+3/7/16,11:35 AM,11:55 AM,0:20:00,Education
+3/7/16,11:55 AM,12:00 PM,0:05:00,Traveling
+3/7/16,12:00 PM,1:50 PM,1:50:00,Education
+3/7/16,1:50 PM,1:57 PM,0:07:00,Traveling
+3/7/16,1:57 PM,4:57 PM,3:00:00,Education
+3/7/16,4:57 PM,5:02 PM,0:05:00,Traveling
+3/7/16,5:02 PM,5:18 PM,0:16:00,Consumer Purchases
+3/7/16,5:18 PM,5:41 PM,0:23:00,Eating And Drinking
+3/7/16,5:41 PM,5:50 PM,0:09:00,Household Activities
+3/7/16,5:50 PM,6:42 PM,0:52:00,Education
+3/7/16,6:42 PM,6:50 PM,0:08:00,Traveling
+3/7/16,6:50 PM,8:01 PM,1:11:00,Education
+3/7/16,8:01 PM,8:08 PM,0:07:00,Traveling
+3/7/16,8:08 PM,9:10 PM,1:02:00,"Sports, Exercise And Recreation"
+3/7/16,9:10 PM,9:26 PM,0:16:00,Traveling
+3/7/16,9:26 PM,11:12 PM,1:46:00,"Socializing, Relaxing, And Leisure"
+3/7/16,11:12 PM,11:41 PM,0:29:00,Education
+3/7/16,11:41 PM,11:48 PM,0:07:00,Personal Care
+3/7/16,11:48 PM,12:04 AM,0:16:00,Education
+3/8/16,12:04 AM,12:27 AM,0:23:00,Personal Care
+3/8/16,12:27 AM,2:01 AM,1:34:00,"Socializing, Relaxing, And Leisure"
+3/8/16,2:01 AM,8:40 AM,6:39:00,Personal Care
+3/8/16,8:40 AM,8:46 AM,0:06:00,Traveling
+3/8/16,8:46 AM,9:00 AM,0:14:00,Eating And Drinking
+3/8/16,9:00 AM,11:05 AM,2:05:00,Education
+3/8/16,11:05 AM,11:09 AM,0:04:00,Traveling
+3/8/16,11:09 AM,11:33 AM,0:24:00,Eating And Drinking
+3/8/16,11:33 AM,11:53 AM,0:20:00,Traveling
+3/8/16,11:53 AM,2:25 PM,2:32:00,Education
+3/8/16,2:25 PM,2:32 PM,0:07:00,Traveling
+3/8/16,2:32 PM,3:25 PM,0:53:00,"Sports, Exercise And Recreation"
+3/8/16,3:25 PM,3:32 PM,0:07:00,Traveling
+3/8/16,3:32 PM,6:05 PM,2:33:00,Education
+3/8/16,6:05 PM,6:15 PM,0:10:00,Traveling
+3/8/16,6:15 PM,6:28 PM,0:13:00,Consumer Purchases
+3/8/16,6:28 PM,6:45 PM,0:17:00,Eating And Drinking
+3/8/16,6:45 PM,7:00 PM,0:15:00,Traveling
+3/8/16,7:00 PM,7:04 PM,0:04:00,Personal Care
+3/8/16,7:04 PM,10:52 PM,3:48:00,"Socializing, Relaxing, And Leisure"
+3/8/16,10:52 PM,11:59 PM,1:07:00,Education

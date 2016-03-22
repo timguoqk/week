@@ -3,7 +3,14 @@ body {
 }
 
 header {
+	position: relative;
 	height: 5vh;
+}
+
+header>.button {
+	position: absolute;
+	top: 0;
+	right: 0;
 }
 
 #main-container {

@@ -130,6 +130,9 @@ $(document).ready(function() {
     init();
   });
   $(window).on('resize', redraw);
+  $('header>.button').on('click', function() {
+    $('.ui.modal#about').modal('show');
+  })
 });
 
 function plot() {
@@ -366,7 +369,7 @@ function plotDow() {
     .domain([0, 1.2 * 24])
     .range([wdH - 20, 15]);
   wdLine = d3.svg.line()
-    .interpolate('basis')
+    .interpolate('monotone')
     .x(function(d) { return wdX(d.x); })
     .y(function(d) { return wdY(d.y); });
   wdXAxis = d3.svg.axis()
