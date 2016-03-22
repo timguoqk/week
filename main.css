@@ -58,12 +58,12 @@ rect.personal, rect.survey {
 	right: 0;
 }
 
-.bar-chart .axis path {
+.bar-chart .axis path, .dow-chart .axis path {
 	fill: none;
 	stroke: black;
 }
 
-.bar-chart .y.axis line {
+.bar-chart .y.axis line, .dow-chart .y.axis line {
 	stroke: black;
 }
 
@@ -105,4 +105,9 @@ rect.personal, rect.survey {
 	width: 0;
 	height: 0;
 	overflow: hidden;
+}
+
+.dow.line {
+	fill: none;
+	stroke-width: 3px;
 }

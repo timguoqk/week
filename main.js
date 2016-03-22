@@ -1,8 +1,9 @@
 'use strict';
-var surveyData, surveyVotedData, personalData, surveyStats, personalStats, mixedStats;
+var surveyData, surveyVotedData, personalData, selectedData, surveyStats, personalStats, mixedStats;
 var width, height, svg, texturesSvg;
 var colorScale;
 var barGroups, barRects;
+var wdSvg, wdX, wdY, wdXAxis, wdYAxis, wdLine;
 var types = ['Personal Care', 'Household Activities', 'Caring For & Helping Household (HH) Members', 'Caring For & Helping NonHH Members', 'Work & Work-Related Activities', 'Education', 'Consumer Purchases', 'Professional & Personal Care Services', 'Household Services', 'Government Services & Civic Obligations', 'Eating And Drinking', 'Socializing, Relaxing, And Leisure', 'Sports, Exercise And Recreation', 'Religious and Spiritual Activities', 'Volunteer Activities', 'Telephone Calls', 'Traveling'];
 var dayOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
@@ -132,6 +133,7 @@ $(document).ready(function() {
 });
 
 function plot() {
+  selectedData = personalData;
   plotMain(personalData);
   plotMain(surveyVotedData);
   plotLegend();
@@ -140,7 +142,6 @@ function plot() {
 }
 
 function plotMain(data) {
-  var selectedData = data;
   var tag = data[0].tag;
   width = $('#main-container .' + tag + '.container').width();
   height = $('#main-container .' + tag + '.container').outerHeight();
@@ -210,13 +211,11 @@ function plotMain(data) {
 
   highlights[tag] = function (idx) {
     if (idx == -1) {
-      selectedData = data;
       $('.bar-chart rect.bar').removeClass('active');
       mainRects.transition().attr('opacity', 1);
       barRects.transition().attr('opacity', 1);
     } else {
       $('.bar-chart rect.bar[category-id=' + idx + ']').addClass('active');
-      selectedData = _.where(data, {type: idx});
       mainRects.transition()
         .attr('opacity', function(d) {
           return (idx == d.type) ? 1 : 0.2;
@@ -261,7 +260,7 @@ function init() {
 
 function plotBar() {
   var barSvg, barH, barW, barX, barX1, barY, barXAxis, barYAxis;
-  barSvg = d3.select(' .bar-chart').append('svg')
+  barSvg = d3.select('.bar-chart').append('svg')
     .append('g').attr('transform', 'translate(30, 0)');
   barW = $('.bar-chart').width() - 30;
   barH = $('.bar-chart').height();
@@ -273,7 +272,7 @@ function plotBar() {
     .rangeRoundBands([0, barX.rangeBand()]);
   barY = d3.scale.linear()
     .domain([0, 90])
-    .range([barH - 20, 0]);
+    .range([barH - 20, 15]);
   barXAxis = d3.svg.axis()
     .scale(barX)
     .orient('bottom')
@@ -347,11 +346,45 @@ function plotBar() {
 
 function plotDow() {
   // dow-chart
-  var wdSvg, wdX, wdY, wdXAxis, wdYAxis;
-  var line = d3.svg.line()
+  var wdW, wdH;
+  wdSvg = d3.select('.dow-chart').append('svg')
+    .append('g').attr('transform', 'translate(30, 0)');
+  wdW = $('.dow-chart').width() - 30;
+  wdH = $('.dow-chart').height();
+  wdX = d3.scale.ordinal()
+    .domain(_.range(7))
+    .rangePoints([0, wdW - 20]);
+  wdY = d3.scale.linear()
+    .domain([0, 1.2 * 24])
+    .range([wdH - 20, 15]);
+  wdLine = d3.svg.line()
     .interpolate('basis')
-    .x(function(d, i) { return wdX(i); })
-    .y(function(d) { return wdY(d); });
+    .x(function(d) { return wdX(d.x); })
+    .y(function(d) { return wdY(d.y); });
+  wdXAxis = d3.svg.axis()
+    .scale(wdX)
+    .orient('bottom')
+    .tickFormat(function(d) {
+      return dayOfWeek[d];
+    });
+  wdYAxis = d3.svg.axis()
+    .scale(wdY)
+    .ticks(5)
+    .orient('left');
+  wdSvg.append('g')
+    .attr('class', 'x axis')
+    .attr('transform', 'translate(0, ' + (wdH - 20) + ')')
+    .call(wdXAxis);
+  wdSvg.append('g')
+    .attr('class', 'y axis')
+    .call(wdYAxis);
+
+  wdSvg.append('path')
+    .attr('class', 'dow line')
+    .attr('d', wdLine(_.range(7).map(function(i) {
+      return {x: i, y: 24};
+    })))
+    .attr('stroke', 'black');
 }
 
 function redraw() {
@@ -367,8 +400,29 @@ var highlights = {};
 function highlight(i) {
   highlights['personal'](i);
   highlights['survey'](i);
-  if (i == -1)
+  if (i == -1) {
+    selectedData = personalData;
     d3.selectAll('.legendCells rect.active').classed('active', false);
-  else
+  } else {
+    selectedData = _.where(personalData, {type: i});
     d3.selectAll('.legendCells>g.cell:nth-of-type(' + (i + 1) + ') rect').classed('active', true);
+  }
+  selectedData = _.range(7).map(function(i) {
+    return {
+      x: i,
+      y: _.where(selectedData, {week: i}).reduce(function(p, c) {
+        return p + (c.stopH + c.stopM / 60 - c.startH - c.startM / 60);
+      }, 0)
+    };
+  });
+  wdY.domain([0, 1.2 * _.max(_.pluck(selectedData, 'y'))]);
+  wdSvg.select('.dow.line')
+    .transition()
+    .duration(800)
+    .attr('d', wdLine(selectedData))
+    .attr('stroke', i == -1 ? 'black' : colorScale(i));
+  wdSvg.select('.y.axis')
+    .transition()
+    .duration(800)
+    .call(wdYAxis);
 }
